@@ -11,6 +11,7 @@ import { toast } from "sonner";
 import { useDispatch, useSelector } from "react-redux";
 import store from "@/redux/store";
 import { setLoading } from "@/redux/authSlice";
+import { Loader2 } from "lucide-react";
 
 const Signup = () => {
   const [input, setInput] = useState({
@@ -144,7 +145,7 @@ const Signup = () => {
             </Button>
           ) : (
             <Button type="submit" className="w-full bg-black text-white  my-4">
-              Login
+              Signup
             </Button>
           )}
           <span className="text-small">
