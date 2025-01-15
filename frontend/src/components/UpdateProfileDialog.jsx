@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Dialog, DialogContent, DialogFooter, DialogHeader, DialogTitle } from "./ui/dialog";
+import { Dialog, DialogContent, DialogDescription, DialogFooter, DialogHeader, DialogTitle } from "./ui/dialog";
 import { Label } from "./ui/label";
 import { Input } from "./ui/input";
 import { Button } from "./ui/button";
@@ -19,7 +19,7 @@ const UpdateProfileDialog = ({ open, setOpen }) => {
         phoneNumber: user?.phoneNumber || "",
         bio: user?.profile?.bio || "",
         skills: user?.profile?.skills?.join(", ") || "",
-        file: null,
+        file: user?.profile?.resume||"",
       });
 
     const dispatch=useDispatch();
@@ -73,6 +73,7 @@ const UpdateProfileDialog = ({ open, setOpen }) => {
     <div >
       <Dialog  open={open}>
         <DialogContent className="bg-white text-black sm:max-w-[425px]" onInteractOutside={()=>setOpen(false)}>
+          <DialogDescription></DialogDescription>
           <DialogHeader>
             <DialogTitle>UpdateProfile</DialogTitle>
           </DialogHeader>
@@ -136,8 +137,8 @@ const UpdateProfileDialog = ({ open, setOpen }) => {
                 </Label>
                 <Input id="file" name="file" 
                 type="file"
-                onChange={fileChangeHandler}
                 accept="application/pdf"
+                onChange={fileChangeHandler}
                className="col-span-3" />
               </div>
             </div>

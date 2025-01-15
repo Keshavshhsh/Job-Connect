@@ -20,7 +20,7 @@ const [open,setOpen]=useState(false);
         <div className="flex justify-between items-center mb-4">
           <div className="flex items-center gap-4">
             <Avatar className="h-24 w-24">
-              <AvatarImage src="https://picsum.photos/200/300" />
+              <AvatarImage src={user?.profile?.profilePhoto} />
             </Avatar>
             <div>
               <h1 className="font-bold text-lg">{user?.fullname}</h1>
@@ -53,8 +53,12 @@ const [open,setOpen]=useState(false);
         </div>
         <div className="grid w-full max-w-sm items-center gap-1.5">
             <Label className="text-md font-bold">Resume</Label>
+            
             {
-                isResume?<a target='blank' href={user?.profile?.resume}  className="text-blue-500 w-full hover:underline cursor-pointer">{user?.profile?.resumeOriginalName}</a>:<span>NA</span>
+              
+                isResume?<a target='_blank' href={user?.profile?.resume}
+                   className="text-blue-500 w-full hover:underline cursor-pointer">{user?.profile?.resumeOriginalName}</a>:<span>NA</span>
+                
             }
         </div>
         <div className="max-w-4xl mx-auto bg-white rounded-2xl">

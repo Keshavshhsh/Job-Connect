@@ -11,6 +11,9 @@ export const register=async(req,res)=>{
                 success:false
             });
         };
+        const file=req.file;
+        const  fileUri=getDataUri(file);
+        const cloudResponse=await cloudinary.uploader.upload(fileUri.content);
         let user=await User.findOne({email});
         if(user){
             return res.status(400).json({message:"Email already exists",
@@ -23,6 +26,9 @@ export const register=async(req,res)=>{
             phoneNumber,
             role,
             password:hashedPassword,
+            profile:{
+                profilePhoto:cloudResponse.secure_url,
+            }
         });
         return res.status(201).json({message:"User created successfully",
             success:true})     
@@ -123,7 +129,7 @@ export const updateProfile=async(req,res)=>{
         }
 
         if(cloudResponse){
-            user.profileresume=cloudResponse.secure_url
+            user.profile.resume=cloudResponse.secure_url
             user.profile.resumeOriginalName=file.originalname
         }
         //resume section 
