@@ -7,6 +7,8 @@ import { useNavigate } from 'react-router-dom'
 import { COMPANY_API_END_POINT } from '@/utils/constant'
 import { useDispatch } from 'react-redux'
 import { setSingleCompany } from '@/redux/companySlice'
+import axios from 'axios'
+import { toast } from 'sonner'
 
 const CompanyCreate = () => {
   const navigate=useNavigate();
@@ -18,7 +20,8 @@ const CompanyCreate = () => {
         headers:{
           'Content-Type':'application/json',
         },
-        withCredentials:true
+        withCredentials:true,
+        
       });
       if(res?.data?.success){
         dispatch(setSingleCompany(res.data.company));

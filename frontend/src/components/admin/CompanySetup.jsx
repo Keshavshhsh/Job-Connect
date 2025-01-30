@@ -1,15 +1,21 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Navbar from "../shared/Navbar";
 import { Button } from "../ui/button";
-import { ArrowLeft } from "lucide-react";
+import { ArrowLeft, Loader2 } from "lucide-react";
 import { Label } from "../ui/label";
 import { Input } from "../ui/input";
 import { COMPANY_API_END_POINT } from "@/utils/constant";
 import { useNavigate, useParams } from "react-router-dom";
 import axios from "axios";
 import store from "@/redux/store";
+import useGetCompanyById from "@/hooks/useGetCompanyById";
+import { useSelector } from "react-redux";
+import { toast } from "sonner";
 
 const CompanySetup = () => {
+  const params = useParams();
+
+  useGetCompanyById(params.id);
   const [input, setInput] = useState({
     name: "",
     description: "",
@@ -17,9 +23,9 @@ const CompanySetup = () => {
     location: "",
     file: null,
   });
-  const {singleCompany}=useSelector(store=>store.company);
+
+  const { singleCompany } = useSelector((store) => store.company);
   const [loading, setLoading] = useState(false);
-  const params = useParams();
   const navigate = useNavigate();
   const changeEventHandler = (e) => {
     setInput({ ...input, [e.target.name]: e.target.value });
@@ -66,13 +72,13 @@ const CompanySetup = () => {
 
   useEffect(() => {
     setInput({
-      name: "",
-      description: "",
-      website: "",
-      location: "",
-      file: null,
+      name: singleCompany.name || "",
+      description: singleCompany.description || "",
+      website: singleCompany.website || "",
+      location: singleCompany.location || "",
+      file: singleCompany.file || null,
     });
-  });
+  }, [singleCompany]);
 
   return (
     <div>
