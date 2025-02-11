@@ -76,16 +76,18 @@ const Navbar = () => {
               </Link>
             </div>
           ) : (
-            <Popover>
+            <Popover className="bg-white">
               <PopoverTrigger asChild>
                 <Avatar className="cursor-pointer">
                   <AvatarImage
                     src={user?.profile?.profilePhoto}
                     alt="@shadcn"
+                    
                   />
                 </Avatar>
               </PopoverTrigger>
-              <PopoverContent className="w-80">
+
+              <PopoverContent className="w-80 bg-white">
                 <div className="flex gap-2 space-y-2">
                   <Avatar className="cursor-pointer">
                     <AvatarImage
@@ -100,7 +102,7 @@ const Navbar = () => {
                     </p>
                   </div>
                 </div>
-                <div className="flex flex-col my-2  text-gray-600">
+                <div className="flex flex-col my-2  text-gray-600 bg-white">
                   {user && user.role == "student" && (
                     <div className="flex w-fit items-center gap-2 cursor-pointer">
                       <User2 />

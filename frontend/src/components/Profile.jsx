@@ -8,9 +8,11 @@ import { Label } from "./ui/label";
 import AppliedJobTables from "./AppliedJobTables";
 import UpdateProfileDialog from "./UpdateProfileDialog";
 import { useSelector } from "react-redux";
+import useGetAppliedJobs from "@/hooks/useGetAppliedJobs";
 // const skills=["Html","Css","Javascript","Reactjs"];
 const isResume=true;
 const profile = () => {
+  useGetAppliedJobs();
 const [open,setOpen]=useState(false);
     const {user}=useSelector(store=>store.auth);
   return (
@@ -62,7 +64,7 @@ const [open,setOpen]=useState(false);
             }
         </div>
         <div className="max-w-4xl mx-auto bg-white rounded-2xl">
-            <h1 className="font-bold text-lg">
+            <h1 className="font-bold text-lg my-5">
                 Applied Jobs
             </h1>
             <AppliedJobTables/>

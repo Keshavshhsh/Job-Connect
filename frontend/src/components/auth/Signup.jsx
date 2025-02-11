@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Navbar from "../shared/Navbar";
 import { Label } from "../ui/label";
 import { Input } from "../ui/input";
@@ -11,7 +11,7 @@ import { toast } from "sonner";
 import { useDispatch, useSelector } from "react-redux";
 import store from "@/redux/store";
 import { setLoading } from "@/redux/authSlice";
-import { Loader2 } from "lucide-react";
+import { Loader2, User } from "lucide-react";
 
 const Signup = () => {
   const [input, setInput] = useState({
@@ -22,7 +22,7 @@ const Signup = () => {
     role: "",
     file: "",
   });
-  const {loading}=useSelector(store=>store.auth);
+  const {loading,user}=useSelector(store=>store.auth);
   const dispatch=useDispatch();
   const navigate=useNavigate();
   const changeEventHandler = (e) => {
@@ -65,6 +65,14 @@ const Signup = () => {
     }
     
   }
+
+
+    useEffect(()=>{
+      if(user){
+        navigate("/");
+      }
+  
+    },[])
 
   return (
     <div className="bg-white min-h-screen">
