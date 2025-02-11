@@ -16,8 +16,9 @@ import { JOB_API_END_POINT } from "@/utils/constant";
 import { toast } from "sonner";
 import { useNavigate } from "react-router-dom";
 import { Loader2 } from "lucide-react";
+import axios from "axios";
 
-const companyArray = [];
+
 
 const PostJob = () => {
   const [input, setInput] = useState({
@@ -67,7 +68,7 @@ const PostJob = () => {
 
 
     }catch(error){
-      toast.error(error.response.data.message);
+      toast.error(error.message);
 
     }finally{
       setLoading(false)
@@ -175,11 +176,11 @@ const PostJob = () => {
                 <SelectTrigger className="w-[180px]">
                   <SelectValue placeholder="Select a Company" />
                 </SelectTrigger>
-                <SelectContent>
+                <SelectContent className="bg-white">
                   <SelectGroup>
-                    {companies.map((company) => {
+                    {companies.map((company,index) => {
                       return (
-                        <SelectItem value={company?.name?.toLowerCase()}>
+                        <SelectItem key={index} value={company?.name?.toLowerCase()}>
                           {company.name}
                         </SelectItem>
                       );

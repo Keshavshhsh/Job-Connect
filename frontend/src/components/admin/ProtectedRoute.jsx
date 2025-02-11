@@ -6,7 +6,7 @@ const ProtectedRoute=({children})=>{
     const {user}=useSelector(store=>store.auth);
     const navigate=useNavigate();
     useEffect(()=>{
-        if(user===NULL||user.role !='recruiter'){
+        if(user===null||user.role !='recruiter'){
             navigate("/");
 
         }
